@@ -426,6 +426,46 @@ class GaussianCompressor:
   </div>
 </div>
 
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/reconstruction-research/1-example1.png" alt="重建示例一" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>重建示例一</h4>
+    <p>室内场景的高质量几何与纹理重建</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/reconstruction-research/2-example2.png" alt="重建示例二" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>重建示例二</h4>
+    <p>户外复杂场景的高斯表示效果</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/reconstruction-research/3-example3.png" alt="重建示例三" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>重建示例三</h4>
+    <p>细粒度结构与边缘区域的重建质量</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/reconstruction-research/4-example4.png" alt="重建示例四" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>重建示例四</h4>
+    <p>不同压缩率下重建质量对比</p>
+  </div>
+</div>
+
 </div>
 
 ## 相关项目

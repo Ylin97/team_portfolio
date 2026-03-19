@@ -1,15 +1,15 @@
 ---
 layout: home
-title: 工程技术团队 - 技术作品集
-titleTemplate: 工程技术团队技术作品集
+title: 空间智能工程团队（Spatial Intelligence Team） - 技术作品集
+titleTemplate: 空间智能工程团队（Spatial Intelligence Team）技术作品集
 
 hero:
-  name: 工程技术团队
+  name: 空间智能工程团队<br><span class="sit-en">(Spatial Intelligence Team)</span>
   text: 打造生产级 AI 与系统
   tagline: 我们专注于三维视觉、SLAM、大语言模型和系统架构。工程卓越与前沿 AI 研究的完美结合。
   image:
-    src: /hero-image.png
-    alt: 工程技术团队标志
+    src: /LOGO.png
+    alt: 空间智能工程团队（Spatial Intelligence Team）标志
   actions:
     - theme: brand
       text: 查看项目
@@ -75,39 +75,39 @@ const projects = [
 
 const galleryImages = [
   {
-    src: '/assets/projects/3dgs-engine/demo-1.png',
-    title: '3DGS 实时渲染',
-    description: '580 万高斯点，89 FPS 实时渲染',
+    src: './assets/projects/3dgs-engine/1-moer-ui.png',
+    title: '3DGS 引擎编辑器',
+    description: '多视图渲染与训练一体化编辑界面',
     project: '/projects/3dgs-engine'
   },
   {
-    src: '/assets/projects/slam-system/exploration-sequence.png',
-    title: '无人机自主探索',
-    description: '基于 FUEL 算法的未知环境探索',
+    src: './assets/projects/slam-system/1-example1.png',
+    title: '无人机 SLAM 轨迹',
+    description: '语义 SLAM 在复杂环境中的实时探索',
     project: '/projects/slam-system'
   },
   {
-    src: '/assets/projects/agent-platform/dashboard.png',
-    title: 'Agent 平台仪表盘',
-    description: '多智能体协作监控系统',
+    src: './assets/projects/agent-platform/1-web-dashboard.png',
+    title: 'Agent 平台 Web 控制台',
+    description: '多智能体任务与系统状态总览',
     project: '/projects/agent-platform'
   },
   {
-    src: '/assets/projects/bridge-system/digital-twin-ui.png',
-    title: '桥梁数字孪生',
-    description: 'IoT 传感器数据实时可视化',
+    src: './assets/projects/bridge-system/1-dashboard.png',
+    title: '桥梁监测总览',
+    description: '关键传感器状态与健康评分仪表盘',
     project: '/projects/bridge-system'
   },
   {
-    src: '/assets/projects/measurement-system/ui-screenshot.png',
-    title: '三维测量系统',
-    description: '交互式尺寸测量界面',
+    src: './assets/projects/measurement-system/1-main.png',
+    title: '三维测量主界面',
+    description: '从重建到标注的一站式测量工作流',
     project: '/projects/measurement-system'
   },
   {
-    src: '/assets/projects/reconstruction-research/semantic-fusion.png',
-    title: '语义融合重建',
-    description: '几何与语义的 3D 融合表示',
+    src: './assets/projects/reconstruction-research/1-example1.png',
+    title: '高斯重建示例',
+    description: '高质量三维重建与渲染研究结果',
     project: '/projects/reconstruction-research'
   }
 ]
@@ -191,6 +191,28 @@ const galleryImages = [
 
 <style>
 /* 首页特定样式 */
+
+/* Hero 区域：仅约束说明文字（tagline）的宽度，避免影响主标题换行 */
+.VPHomeHero.has-image .tagline {
+  max-width: 40rem !important;
+}
+
+/* Hero 区域：将 LOGO 往右移动，避免挤压标题 */
+.VPHomeHero .image {
+  margin-left: 15rem;
+}
+
+/* 保证英文队名在单行内显示，不再把 Team) 挤到下一行 */
+.VPHomeHero .name .sit-en {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .VPHomeHero .image {
+    margin-left: 0;
+  }
+}
+
 .project-card {
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;

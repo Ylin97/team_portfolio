@@ -613,6 +613,46 @@ public:
   </div>
 </div>
 
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/bridge-system/1-dashboard.png" alt="监测总览仪表盘" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>监测总览</h4>
+    <p>桥梁整体健康状态与关键指标概览</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/bridge-system/2-report.png" alt="报告页面" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>报告中心</h4>
+    <p>自动生成结构健康与运维分析报告</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/bridge-system/3-model.jpg" alt="桥梁 3D 模型" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>高精度 3D 模型</h4>
+    <p>用于数字孪生与传感器投影的桥梁几何模型</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/bridge-system/4-monitor.png" alt="监控大屏" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>监控大屏</h4>
+    <p>多桥梁、多工况的综合监测视图</p>
+  </div>
+</div>
+
 </div>
 
 ## 相关项目

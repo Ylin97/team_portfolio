@@ -223,6 +223,46 @@ public:
   </div>
 </div>
 
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/3dgs-engine/1-moer-ui.png" alt="编辑器 UI" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>编辑器主界面</h4>
+    <p>项目、场景与训练一体化工作流</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/3dgs-engine/2-data-monitor.png" alt="数据监控" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>数据监控面板</h4>
+    <p>渲染与训练过程中的关键指标监控</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/3dgs-engine/3-model-training.png" alt="模型训练" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>模型训练视图</h4>
+    <p>3DGS 训练进度与损失曲线实时展示</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/3dgs-engine/4-model-segmentation.png" alt="模型分割" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>模型分割结果</h4>
+    <p>按语义/实例对高斯场景进行可视化分割</p>
+  </div>
+</div>
+
 </div>
 
 ## 相关项目

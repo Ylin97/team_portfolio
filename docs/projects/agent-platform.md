@@ -520,6 +520,66 @@ class LoRAFineTuner:
   </div>
 </div>
 
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/agent-platform/1-web-dashboard.png" alt="Web 控制台" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>Web 控制台</h4>
+    <p>多项目、多环境下的统一管理入口</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/agent-platform/2-data-management.png" alt="数据管理" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>数据管理中心</h4>
+    <p>知识库与数据源的集中配置与监控</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/agent-platform/3-Agent-center.png" alt="Agent 中心" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>Agent 中心</h4>
+    <p>各类智能体的状态、路由和健康度总览</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/agent-platform/4-Agent-management.png" alt="Agent 管理" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>Agent 管理界面</h4>
+    <p>按业务场景配置和回滚不同 Agent 版本</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/agent-platform/5-rag.png" alt="RAG 流程" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>RAG 管线视图</h4>
+    <p>检索增强生成在真实业务问答中的应用</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/agent-platform/6-report.png" alt="报告页面" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>自动化报告</h4>
+    <p>基于 Agent 工作流生成结构化运营报告</p>
+  </div>
+</div>
+
 </div>
 
 ## 相关项目

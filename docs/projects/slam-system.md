@@ -376,6 +376,46 @@ public:
   </div>
 </div>
 
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/slam-system/1-example1.png" alt="SLAM 示例一" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>轨迹与地图</h4>
+    <p>典型室内环境下的轨迹与占据地图</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/slam-system/2-example2.png" alt="SLAM 示例二" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>多楼层场景</h4>
+    <p>多层空间中的全局一致地图构建</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/slam-system/3-example3.png" alt="SLAM 示例三" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>复杂障碍环境</h4>
+    <p>狭窄通道与障碍物密集场景的探索</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/slam-system/4-example4.png" alt="SLAM 示例四" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>户外大范围任务</h4>
+    <p>结合 RTK 的大尺度户外探索任务</p>
+  </div>
+</div>
+
 </div>
 
 ## 相关项目

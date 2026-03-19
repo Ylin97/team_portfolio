@@ -296,6 +296,46 @@ def measure_volume(region, reconstruction):
   </div>
 </div>
 
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/measurement-system/1-main.png" alt="测量系统主界面" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>主工作流视图</h4>
+    <p>从数据导入到结果导出的完整测量流程</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/measurement-system/2-point-cloud-edit.png" alt="点云编辑" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>点云编辑工具</h4>
+    <p>对重建点云进行裁剪、分段与清理</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/measurement-system/3-example1.png" alt="测量示例一" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>测量案例一</h4>
+    <p>大件货物尺寸自动测量示例</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="../assets/projects/measurement-system/4-example2.png" alt="测量示例二" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>测量案例二</h4>
+    <p>复杂场景下的体积与面积测量</p>
+  </div>
+</div>
+
 </div>
 
 ## 相关项目
