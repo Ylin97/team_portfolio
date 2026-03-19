@@ -1,0 +1,30 @@
+{
+  "name": "team-portfolio-website",
+  "version": "1.0.0",
+  "description": "Engineering Team Technical Portfolio Website",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "team",
+    "portfolio",
+    "engineering",
+    "3dgs",
+    "slam",
+    "agent",
+    "vitepress"
+  ],
+  "author": "Engineering Team",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.14",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

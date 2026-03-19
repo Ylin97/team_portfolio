@@ -1,0 +1,313 @@
+/* Engineering Team Custom Styles */
+
+/* 全局变量 */
+:root {
+  --vp-c-brand: #3eaf7c;
+  --vp-c-brand-light: #5bc98f;
+  --vp-c-brand-dark: #2d8f63;
+  --vp-c-text-dark: #e0e0e0;
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f6f6f7;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-divider: #e2e2e3;
+}
+
+.dark {
+  --vp-c-bg: #1a1a1a;
+  --vp-c-bg-alt: #161618;
+  --vp-c-bg-elv: #202022;
+  --vp-c-divider: #38383a;
+}
+
+/* Hero 区域优化 */
+.VPHero {
+  padding: 4rem 0;
+}
+
+.VPHero .name {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.VPHero .text {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.5;
+}
+
+.VPHero .tagline {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--vp-c-text-2);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Feature 卡片 */
+.VPFeatures {
+  padding: 3rem 0;
+}
+
+.VPFeature {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background-color: var(--vp-c-bg-elv);
+  transition: all 0.3s ease;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.VPFeature .icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.VPFeature .title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.VPFeature .details {
+  font-size: 0.95rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+}
+
+/* 项目卡片 */
+.project-card {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--vp-c-bg-elv);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.project-card h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.25rem;
+  color: var(--vp-c-brand);
+}
+
+.project-card p {
+  margin: 0 0 1rem 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+}
+
+.project-card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.project-card .tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 999px;
+  background-color: var(--vp-c-brand-light);
+  color: #fff;
+}
+
+.project-card .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--vp-c-brand);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.project-card .link:hover {
+  opacity: 0.8;
+}
+
+/* 技术理念区域 */
+.philosophy-section {
+  padding: 3rem 0;
+  border-top: 1px solid var(--vp-c-divider);
+  margin-top: 3rem;
+}
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.philosophy-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: var(--vp-c-bg-alt);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.philosophy-item h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  color: var(--vp-c-brand);
+}
+
+.philosophy-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+}
+
+/* 项目详情页优化 */
+.project-detail h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--vp-c-brand);
+}
+
+.project-detail h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.project-detail h3 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-detail .vp-doc {
+  max-width: 100%;
+}
+
+/* 代码块优化 */
+.vp-doc pre,
+.vp-code {
+  background-color: var(--vp-c-bg-alt);
+  border-radius: 8px;
+}
+
+/* 表格优化 */
+.vp-doc table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: 1px solid var(--vp-c-divider);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.vp-doc th {
+  background-color: var(--vp-c-bg-alt);
+  font-weight: 600;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .VPHero {
+    padding: 2rem 0;
+  }
+  
+  .VPFeatures {
+    padding: 2rem 0;
+  }
+  
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 深色模式优化 */
+.dark .project-card {
+  background-color: var(--vp-c-bg-elv);
+}
+
+.dark .philosophy-item {
+  background-color: var(--vp-c-bg-alt);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.VPHero,
+.VPFeatures,
+.project-card,
+.philosophy-item {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* 链接样式 */
+.vp-doc a {
+  color: var(--vp-c-brand);
+  text-decoration: none;
+}
+
+.vp-doc a:hover {
+  text-decoration: underline;
+}
+
+/* 按钮样式 */
+.VPHero .actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.VPHero .action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.VPHero .action.primary {
+  background-color: var(--vp-c-brand);
+  color: #fff;
+}
+
+.VPHero .action.primary:hover {
+  background-color: var(--vp-c-brand-dark);
+}
+
+.VPHero .action.alt {
+  background-color: var(--vp-c-bg-alt);
+  color: var(--vp-c-text);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.VPHero .action.alt:hover {
+  border-color: var(--vp-c-brand);
+  color: var(--vp-c-brand);
+}
