@@ -1,100 +1,100 @@
 ---
-title: LLM Agent Platform
-description: Multi-agent platform with Planner/Tool/Memory architecture, vLLM distributed inference, LoRA fine-tuning, and RAG knowledge base.
+title: 大模型 Agent 平台
+description: 多智能体平台，采用 Planner/Tool/Memory 架构，支持 vLLM 分布式推理、LoRA 微调和 RAG 知识库。
 ---
 
-# LLM Agent Platform
+# 大模型 Agent 平台
 
-An enterprise-grade multi-agent platform supporting specialized agents (planner, tool executor, memory manager) with scalable vLLM inference backend and retrieval-augmented generation for domain-specific knowledge.
+企业级多智能体平台，支持专用智能体（规划器、工具执行器、记忆管理器），具有可扩展的 vLLM 推理后端和检索增强生成领域知识。
 
-## Project Background
+## 项目背景
 
-### Problem Statement
+### 问题陈述
 
-Organizations face challenges deploying LLMs in production:
-- **Single-model limitations**: No single model excels at all tasks
-- **Context constraints**: Limited context windows for complex workflows
-- **Knowledge gaps**: Models lack domain-specific knowledge
-- **Tool integration**: Difficulty connecting to external systems
-- **Cost efficiency**: Inference costs at scale
+组织在生产环境中部署大模型面临挑战：
+- **单模型限制**: 没有单一模型擅长所有任务
+- **上下文约束**: 有限上下文窗口处理复杂工作流
+- **知识差距**: 模型缺乏领域特定知识
+- **工具集成**: 难以连接到外部系统
+- **成本效率**: 规模化推理成本
 
-### Industry Context
+### 行业背景
 
-The agent paradigm enables:
-- **Task decomposition**: Complex problems broken into manageable steps
-- **Tool augmentation**: LLMs can interact with APIs, databases, code
-- **Memory systems**: Long-term context across sessions
-- **Specialization**: Different agents for different capabilities
+智能体范式实现：
+- **任务分解**: 复杂问题拆分为可管理步骤
+- **工具增强**: 大模型可以与 API、数据库、代码交互
+- **记忆系统**: 跨会话长期上下文
+- **专业化**: 不同智能体处理不同能力
 
-## System Architecture
+## 系统架构
 
 ```mermaid
 graph TB
-    subgraph User Interface
-        A[Web UI] --> B[API Gateway]
+    subgraph 用户界面
+        A[Web UI] --> B[API 网关]
         C[CLI] --> B
         D[SDK] --> B
     end
     
-    subgraph Agent Core
-        B --> E[Orchestrator]
-        E --> F[Planner Agent]
-        E --> G[Tool Agent]
-        E --> H[Memory Agent]
-        E --> I[Critic Agent]
+    subgraph 智能体核心
+        B --> E[编排器]
+        E --> F[规划智能体]
+        E --> G[工具智能体]
+        E --> H[记忆智能体]
+        E --> I[评论智能体]
     end
     
-    subgraph Infrastructure
-        F --> J[Task Queue]
-        G --> K[Tool Registry]
-        H --> L[Vector Database]
-        I --> M[Evaluation Service]
+    subgraph 基础设施
+        F --> J[任务队列]
+        G --> K[工具注册表]
+        H --> L[向量数据库]
+        I --> M[评估服务]
     end
     
-    subgraph Model Layer
-        J --> N[vLLM Cluster]
+    subgraph 模型层
+        J --> N[vLLM 集群]
         K --> N
         L --> N
-        N --> O[Base LLM]
-        N --> P[Fine-tuned LLM]
-        N --> Q[Embedding Model]
+        N --> O[基础大模型]
+        N --> P[微调大模型]
+        N --> Q[嵌入模型]
     end
 ```
 
-### Module Overview
+### 模块概述
 
-| Module | Responsibility | Technology |
-|--------|---------------|------------|
-| **Orchestrator** | Agent coordination, task routing | Python asyncio |
-| **Planner Agent** | Task decomposition, workflow planning | ReAct prompting |
-| **Tool Agent** | Tool selection, API execution | Function calling |
-| **Memory Agent** | Short/long-term memory management | Vector DB + Redis |
-| **Critic Agent** | Output validation, quality assurance | Self-reflection |
-| **vLLM Backend** | High-throughput inference | vLLM, PagedAttention |
+| 模块 | 职责 | 技术 |
+|------|------|------|
+| **编排器** | 智能体协调、任务路由 | Python asyncio |
+| **规划智能体** | 任务分解、工作流规划 | ReAct 提示 |
+| **工具智能体** | 工具选择、API 执行 | 函数调用 |
+| **记忆智能体** | 短/长期记忆管理 | 向量 DB + Redis |
+| **评论智能体** | 输出验证、质量保证 | 自反思 |
+| **vLLM 后端** | 高吞吐推理 | vLLM, PagedAttention |
 
-### Data Flow
+### 数据流
 
-1. **Request**: User submits task via API/UI
-2. **Orchestration**: Task routed to Planner Agent
-3. **Planning**: Task decomposed into subtasks with dependencies
-4. **Execution**: Tool Agent executes actions, Memory Agent retrieves context
-5. **Validation**: Critic Agent reviews outputs
-6. **Response**: Aggregated results returned to user
+1. **请求**: 用户通过 API/UI 提交任务
+2. **编排**: 任务路由到规划智能体
+3. **规划**: 任务分解为带依赖关系的子任务
+4. **执行**: 工具智能体执行动作，记忆智能体检索上下文
+5. **验证**: 评论智能体审查输出
+6. **响应**: 聚合结果返回给用户
 
-### Technology Stack
+### 技术栈
 
-- **Core Language**: Python 3.10, TypeScript
-- **LLM Framework**: LangChain, LlamaIndex
-- **Inference**: vLLM, HuggingFace Transformers
-- **Vector DB**: Qdrant, Chroma
-- **Message Queue**: Redis Streams, RabbitMQ
+- **核心语言**: Python 3.10, TypeScript
+- **大模型框架**: LangChain, LlamaIndex
+- **推理**: vLLM, HuggingFace Transformers
+- **向量 DB**: Qdrant, Chroma
+- **消息队列**: Redis Streams, RabbitMQ
 - **API**: FastAPI, GraphQL
 
-## Core Technologies
+## 核心技术
 
-### Multi-Agent Architecture
+### 多智能体架构
 
-**Agent Base Class**:
+**智能体基类**:
 ```python
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
@@ -122,49 +122,49 @@ class BaseAgent(ABC):
         pass
     
     async def think(self, context: List[AgentMessage]) -> str:
-        """Generate reasoning trace"""
+        """生成推理轨迹"""
         prompt = self._build_prompt(context)
         response = await self.llm.generate(prompt)
         return response.content
     
     async def act(self, action: Dict) -> Any:
-        """Execute action/tool"""
+        """执行动作/工具"""
         tool = self.tool_registry.get(action['name'])
         return await tool.execute(**action['parameters'])
 ```
 
-**Planner Agent (ReAct Pattern)**:
+**规划智能体（ReAct 模式）**:
 ```python
 class PlannerAgent(BaseAgent):
     """
-    Decomposes complex tasks into executable subtasks
-    Uses ReAct (Reasoning + Acting) prompting
+    将复杂任务分解为可执行子任务
+    使用 ReAct（推理 + 行动）提示
     """
     
     REACT_PROMPT = """
-    You are a planning agent. Decompose the task into subtasks.
-    
-    Format:
-    Thought: [Your reasoning about the current state]
-    Plan: [Next action to take]
-    
-    Available tools: {tools}
-    
-    Task: {task}
-    History: {history}
-    """
+你是一个规划智能体。将任务分解为子任务。
+
+格式：
+Thought: [你对当前状态的推理]
+Plan: [要采取的下一步行动]
+
+可用工具：{tools}
+
+任务：{task}
+历史：{history}
+"""
     
     async def process(self, message: AgentMessage) -> AgentResponse:
         context = self.memory.get_recent_messages(limit=10)
         
-        # Iterative planning loop
+        # 迭代规划循环
         subtasks = []
         max_iterations = 10
         
         for iteration in range(max_iterations):
             thought = await self.think(context)
             
-            # Parse ReAct output
+            # 解析 ReAct 输出
             action = self._parse_action(thought)
             
             if action['type'] == 'FINAL_ANSWER':
@@ -174,7 +174,7 @@ class PlannerAgent(BaseAgent):
                     tool_calls=subtasks
                 )
             
-            # Execute action
+            # 执行动作
             result = await self.act(action)
             context.append(AgentMessage(
                 role='tool',
@@ -184,17 +184,17 @@ class PlannerAgent(BaseAgent):
             subtasks.append(action)
         
         return AgentResponse(
-            content="Failed to complete task within iteration limit",
+            content="未能在迭代限制内完成任务",
             success=False,
             tool_calls=subtasks
         )
 ```
 
-**Tool Agent**:
+**工具智能体**:
 ```python
 class ToolAgent(BaseAgent):
     """
-    Executes tools and external API calls
+    执行工具和外部 API 调用
     """
     
     def __init__(self, config: AgentConfig):
@@ -214,7 +214,7 @@ class ToolAgent(BaseAgent):
         parameters = message.metadata.get('parameters', {})
         
         if not tool_name:
-            # Let LLM select tool
+            # 让大模型选择工具
             selection = await self._select_tool(message.content)
             tool_name = selection.tool_name
             parameters = selection.parameters
@@ -230,15 +230,15 @@ class ToolAgent(BaseAgent):
             )
         except Exception as e:
             return AgentResponse(
-                content=f"Tool execution failed: {str(e)}",
+                content=f"工具执行失败：{str(e)}",
                 success=False,
                 metadata={'error': str(e)}
             )
 ```
 
-### vLLM Distributed Inference
+### vLLM 分布式推理
 
-**Configuration**:
+**配置**:
 ```python
 from vllm import LLM, SamplingParams
 
@@ -250,8 +250,8 @@ class vLLMBackend:
             max_num_batched_tokens=config.max_batch_tokens,
             max_num_seqs=config.max_concurrent_requests,
             gpu_memory_utilization=0.9,
-            enforce_eager=False,  # Use CUDA graphs
-            quantization=config.quantization,  # AWQ, GPTQ, etc.
+            enforce_eager=False,  # 使用 CUDA 图
+            quantization=config.quantization,  # AWQ, GPTQ 等
         )
         
         self.sampling_params = SamplingParams(
@@ -266,7 +266,7 @@ class vLLMBackend:
         return [output.outputs[0].text for output in outputs]
     
     async def generate_streaming(self, prompt: str):
-        """Streaming generation for real-time responses"""
+        """流式生成用于实时响应"""
         results_generator = self.llm.generate(
             prompt, 
             self.sampling_params,
@@ -277,15 +277,15 @@ class vLLMBackend:
             yield request_output.outputs[0].text
 ```
 
-**Performance Optimization**:
-- **PagedAttention**: 24x throughput improvement vs naive implementation
-- **Continuous batching**: Dynamic request scheduling
-- **KV cache sharing**: Prefix caching for common prompts
-- **Quantization**: AWQ/GPTQ for 2-4x speedup
+**性能优化**:
+- **PagedAttention**: 相比朴素实现 24 倍吞吐提升
+- **连续批处理**: 动态请求调度
+- **KV 缓存共享**: 常见提示前缀缓存
+- **量化**: AWQ/GPTQ 实现 2-4 倍加速
 
-### RAG Knowledge Base
+### RAG 知识库
 
-**Document Pipeline**:
+**文档管线**:
 ```python
 class RAGPipeline:
     def __init__(self, config: RAGConfig):
@@ -300,17 +300,17 @@ class RAGPipeline:
         )
     
     async def ingest(self, documents: List[Document]) -> IngestionResult:
-        """Process and store documents"""
+        """处理和存储文档"""
         results = []
         
         for doc in documents:
-            # Chunk document
+            # 分块文档
             chunks = self.chunker.split_text(doc.content)
             
-            # Generate embeddings
+            # 生成嵌入
             embeddings = self.embedder.encode(chunks)
             
-            # Store in vector DB
+            # 存储到向量数据库
             ids = self.vector_store.add(
                 collection_name=doc.collection,
                 vectors=embeddings,
@@ -328,7 +328,7 @@ class RAGPipeline:
         return IngestionResult(success=True, document_count=len(results))
     
     async def retrieve(self, query: str, collection: str, top_k: int = 5):
-        """Retrieve relevant documents"""
+        """检索相关文档"""
         query_embedding = self.embedder.encode([query])[0]
         
         results = self.vector_store.search(
@@ -337,31 +337,31 @@ class RAGPipeline:
             limit=top_k
         )
         
-        # Re-rank with cross-encoder (optional)
+        # 使用交叉编码器重新排序（可选）
         if self.config.use_reranker:
             results = await self._rerank(query, results)
         
         return results
     
     async def generate_with_context(self, query: str, collection: str):
-        """Generate response with RAG"""
-        # Retrieve context
+        """使用 RAG 生成响应"""
+        # 检索上下文
         context_docs = await self.retrieve(query, collection)
         context_text = "\n\n".join([doc.payload["content"] for doc in context_docs])
         
-        # Build prompt
+        # 构建提示
         prompt = f"""
-        Answer the question based on the context below.
-        If the answer cannot be found in the context, say "I don't have enough information."
+根据以下上下文回答问题。
+如果上下文中找不到答案，请说"我没有足够的信息"。
+
+上下文：
+{context_text}
+
+问题：{query}
+答案：
+"""
         
-        Context:
-        {context_text}
-        
-        Question: {query}
-        Answer:
-        """
-        
-        # Generate response
+        # 生成响应
         response = await self.llm.generate(prompt)
         
         return RAGResponse(
@@ -371,9 +371,9 @@ class RAGPipeline:
         )
 ```
 
-### LoRA Fine-tuning
+### LoRA 微调
 
-**Configuration**:
+**配置**:
 ```python
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
@@ -390,7 +390,7 @@ class LoRAFineTuner:
     
     def setup_lora(self):
         lora_config = LoraConfig(
-            r=self.config.lora_rank,  # Typically 8-64
+            r=self.config.lora_rank,  # 通常 8-64
             lora_alpha=self.config.lora_alpha,
             target_modules=self.config.target_modules,  # ["q_proj", "v_proj"]
             lora_dropout=self.config.dropout,
@@ -427,83 +427,171 @@ class LoRAFineTuner:
         self.model.save_pretrained(self.config.output_dir)
 ```
 
-## Personal Responsibilities
+## 个人职责
 
-- **Architected** multi-agent system with specialized agent roles
-- **Implemented** vLLM backend with custom optimization
-- **Designed** RAG pipeline with hybrid retrieval (dense + sparse)
-- **Developed** LoRA fine-tuning pipeline for domain adaptation
-- **Built** tool registry with 20+ pre-built integrations
+- **架构设计** 多智能体系统与专用智能体角色
+- **实现** vLLM 后端与自定义优化
+- **设计** RAG 管线与混合检索（稠密 + 稀疏）
+- **开发** LoRA 微调管线用于领域适配
+- **构建** 工具注册表与 20+ 预建集成
 
-## Project Outcomes
+## 项目成果
 
-### Performance Benchmarks
+### 性能基准
 
-| Metric | Baseline | Our System | Improvement |
-|--------|----------|------------|-------------|
-| Throughput (req/s) | 12 | 285 | 23.8x |
-| P99 Latency | 2.4s | 0.45s | 5.3x faster |
-| Context Length | 4K | 32K | 8x |
-| Cost per 1K tokens | $0.03 | $0.004 | 7.5x cheaper |
+| 指标 | 基线 | 本系统 | 提升 |
+|------|------|--------|------|
+| 吞吐量 (req/s) | 12 | 285 | 23.8 倍 |
+| P99 延迟 | 2.4s | 0.45s | 5.3 倍更快 |
+| 上下文长度 | 4K | 32K | 8 倍 |
+| 每千 token 成本 | $0.03 | $0.004 | 7.5 倍更便宜 |
 
-### Task Success Rates
+### 任务成功率
 
-| Task Type | Success Rate | Avg. Iterations |
-|-----------|--------------|-----------------|
-| Simple Q&A | 94% | 1.2 |
-| Multi-step Reasoning | 87% | 4.5 |
-| Code Generation | 82% | 3.8 |
-| Data Analysis | 89% | 5.2 |
-| API Integration | 91% | 2.9 |
+| 任务类型 | 成功率 | 平均迭代次数 |
+|---------|--------|-------------|
+| 简单问答 | 94% | 1.2 |
+| 多步推理 | 87% | 4.5 |
+| 代码生成 | 82% | 3.8 |
+| 数据分析 | 89% | 5.2 |
+| API 集成 | 91% | 2.9 |
 
-### Deployment Scale
+### 部署规模
 
-- **Daily active users**: 500+
-- **Requests per day**: 50,000+
-- **Knowledge base**: 100K+ documents
-- **Custom tools**: 25+ integrations
-- **GPU cluster**: 8x A100 (40GB)
+- **日活跃用户**: 500+
+- **每日请求**: 50,000+
+- **知识库**: 100K+ 文档
+- **自定义工具**: 25+ 集成
+- **GPU 集群**: 8x A100 (40GB)
 
-## Demo
+## 演示
 
-### Agent Interaction Flow
+### 智能体交互流程
 
-![Agent Flow](/assets/projects/agent-platform/agent-flow.png)
+![智能体流程](/assets/projects/agent-platform/agent-flow.png)
 
-*Multi-agent collaboration for complex task execution*
+*复杂任务执行的多智能体协作*
 
-### Dashboard Interface
+### 仪表盘界面
 
-![Dashboard](/assets/projects/agent-platform/dashboard.png)
+![仪表盘](/assets/projects/agent-platform/dashboard.png)
 
-*Real-time monitoring of agent activities and system metrics*
+*智能体活动和系统指标的实时监控*
 
-### RAG Query Example
+### RAG 查询示例
 
 ```
-User: What is our Q3 revenue growth compared to last year?
+用户：我们第三季度收入同比增长是多少？
 
-[Memory Agent retrieves Q3 financial reports]
-[Tool Agent queries revenue database]
-[Planner Agent structures comparison]
-[Critic Agent validates calculation]
+[记忆智能体检索 Q3 财务报告]
+[工具智能体查询收入数据库]
+[规划智能体构建对比]
+[评论智能体验证计算]
 
-Response: Q3 2024 revenue was $45.2M, representing 23% growth 
-compared to Q3 2023 ($36.8M). This exceeds our target of 18% growth.
+响应：2024 年 Q3 收入为 4520 万元，相比 2023 年 Q3（3680 万元）
+增长 23%。超过我们 18% 的增长目标。
 
-Sources: 
-- Q3_2024_Financial_Report.pdf (page 12)
-- Revenue_Database (query: SELECT * FROM quarterly_revenue WHERE year IN (2023, 2024))
+来源：
+- Q3_2024_Financial_Report.pdf（第 12 页）
+- 收入数据库（查询：SELECT * FROM quarterly_revenue WHERE year IN (2023, 2024)）
 ```
 
-## Related Projects
+## 画廊
 
-- [3D Reconstruction Research](/projects/reconstruction-research) - Research applications
-- [SLAM + UAV System](/projects/slam-system) - Domain-specific agent applications
+<div class="gallery-grid">
 
-## References
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/agent-platform/agent-flow.png" alt="智能体流程" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>智能体协作</h4>
+    <p>多智能体任务执行流程</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/agent-platform/dashboard.png" alt="仪表盘" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>监控仪表盘</h4>
+    <p>实时系统监控</p>
+  </div>
+</div>
+
+</div>
+
+## 相关项目
+
+- [三维重建研究](/projects/reconstruction-research) - 研究应用
+- [SLAM + 无人机系统](/projects/slam-system) - 领域特定智能体应用
+
+## 参考文献
 
 1. Yao, S., et al. "ReAct: Synergizing Reasoning and Acting in Language Models." ICLR 2023.
 2. Kwon, W., et al. "Efficient Memory Management for Large Language Model Serving with PagedAttention." SOSP 2023.
 3. Hu, E.J., et al. "LoRA: Low-Rank Adaptation of Large Language Models." ICLR 2022.
 4. Lewis, P., et al. "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." NeurIPS 2020.
+
+<style>
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-alt);
+}
+
+.gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-info {
+  padding: 1.25rem;
+}
+
+.gallery-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--vp-c-brand);
+}
+
+.gallery-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+</style>

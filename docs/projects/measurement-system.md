@@ -1,142 +1,142 @@
 ---
-title: Measurement System (3DGS)
-description: Image/video to 3D reconstruction system with GPS scale recovery for automatic dimension measurement of large-scale objects.
+title: 测量系统 (3DGS)
+description: 图像/视频到三维重建系统，带有 GPS 尺度恢复功能，用于大尺寸物体自动尺寸测量。
 ---
 
-# Measurement System (3DGS)
+# 测量系统 (3DGS)
 
-An end-to-end measurement system that reconstructs 3D geometry from images/videos using 3D Gaussian Splatting, recovers absolute scale using GPS data, and provides automated measurement tools for industrial applications.
+端到端测量系统，使用 3D 高斯泼溅从图像/视频重建 3D 几何，利用 GPS 数据恢复绝对尺度，为工业应用提供自动测量工具。
 
-## Project Background
+## 项目背景
 
-### Problem Statement
+### 问题陈述
 
-Industrial measurement of large-scale objects (e.g., cargo, construction materials, infrastructure) traditionally requires:
-- Physical contact measurement (time-consuming, safety risks)
-- Specialized LiDAR equipment (expensive, limited deployment)
-- Manual photogrammetry workflows (slow, expertise-dependent)
+大尺寸物体（如货物、建筑材料、基础设施）的工业测量传统上需要：
+- 物理接触测量（耗时、安全风险）
+- 专用 LiDAR 设备（昂贵、部署受限）
+- 手动摄影测量工作流程（缓慢、依赖专业知识）
 
-### Industry Context
+### 行业背景
 
-Applications include:
-- **Logistics**: Dimension verification for oversized cargo transport
-- **Construction**: Material volume estimation
-- **Infrastructure**: Structural deformation monitoring
-- **Surveying**: Rapid site documentation
+应用包括：
+- **物流**: 超大货物尺寸验证
+- **建筑**: 材料体积估算
+- **基础设施**: 结构变形监测
+- **测量**: 快速场地记录
 
-## System Architecture
+## 系统架构
 
 ```mermaid
 graph LR
-    subgraph Data Acquisition
-        A[Camera/Video] --> B[GPS Logger]
-        C[Drone/Handheld] --> A
+    subgraph 数据采集
+        A[相机/视频] --> B[GPS 记录器]
+        C[无人机/手持] --> A
         C --> B
     end
     
-    subgraph Processing Pipeline
-        B --> D[Structure from Motion]
+    subgraph 处理管线
+        B --> D[运动恢复结构]
         A --> D
-        D --> E[3DGS Optimization]
-        E --> F[GPS Scale Recovery]
-        F --> G[Mesh Extraction]
+        D --> E[3DGS 优化]
+        E --> F[GPS 尺度恢复]
+        F --> G[网格提取]
     end
     
-    subgraph Measurement
-        G --> H[Measurement Tools]
-        H --> I[Distance]
-        H --> J[Area]
-        H --> K[Volume]
-        I --> L[Report Generation]
+    subgraph 测量
+        G --> H[测量工具]
+        H --> I[距离]
+        H --> J[面积]
+        H --> K[体积]
+        I --> L[报告生成]
         J --> L
         K --> L
     end
 ```
 
-### Module Overview
+### 模块概述
 
-| Module | Responsibility | Technology |
-|--------|---------------|------------|
-| **SfM Pipeline** | Camera pose estimation, sparse reconstruction | COLMAP |
-| **3DGS Optimizer** | Dense Gaussian optimization | Modified 3DGS |
-| **Scale Recovery** | GPS integration, metric scale | Bundle Adjustment |
-| **Mesh Extraction** | Surface reconstruction | Marching Cubes |
-| **Measurement UI** | Interactive tools | Qt + OpenGL |
+| 模块 | 职责 | 技术 |
+|------|------|------|
+| **SfM 管线** | 相机位姿估计、稀疏重建 | COLMAP |
+| **3DGS 优化器** | 稠密高斯优化 | 修改版 3DGS |
+| **尺度恢复** | GPS 集成、度量尺度 | 光束平差 |
+| **网格提取** | 表面重建 | 移动立方体 |
+| **测量 UI** | 交互工具 | Qt + OpenGL |
 
-### Data Flow
+### 数据流
 
-1. **Capture**: Images/video + synchronized GPS logs
-2. **Preprocessing**: Frame extraction, GPS interpolation, undistortion
-3. **SfM**: Feature matching, camera poses, sparse point cloud
-4. **3DGS Training**: Dense Gaussian optimization with photometric loss
-5. **Scale Recovery**: GPS constraint integration in BA
-6. **Measurement**: Interactive tools on reconstructed scene
+1. **采集**: 图像/视频 + 同步 GPS 日志
+2. **预处理**: 帧提取、GPS 插值、畸变校正
+3. **SfM**: 特征匹配、相机位姿、稀疏点云
+4. **3DGS 训练**: 带有光度损失的稠密高斯优化
+5. **尺度恢复**: GPS 约束集成到 BA
+6. **测量**: 重建场景上的交互工具
 
-### Technology Stack
+### 技术栈
 
-- **Core Language**: Python 3.9, C++17
-- **3DGS**: Modified Gaussian Splatting codebase
+- **核心语言**: Python 3.9, C++17
+- **3DGS**: 修改版高斯泼溅代码库
 - **SfM**: COLMAP
-- **Optimization**: PyTorch, CUDA
-- **UI Framework**: Qt 6, PySide6
-- **Visualization**: OpenGL, Open3D
+- **优化**: PyTorch, CUDA
+- **UI 框架**: Qt 6, PySide6
+- **可视化**: OpenGL, Open3D
 
-## Core Technologies
+## 核心技术
 
-### GPS Scale Recovery
+### GPS 尺度恢复
 
-**Challenge**: 3DGS produces scaleless reconstruction; GPS provides absolute scale
+**挑战**: 3DGS 产生无尺度重建；GPS 提供绝对尺度
 
-**Approach**:
+**方法**:
 ```python
 class GPSScaleRecovery:
     def __init__(self, gps_data, initial_reconstruction):
-        self.gps_positions = gps_data  # WGS84 coordinates
+        self.gps_positions = gps_data  # WGS84 坐标
         self.reconstruction = initial_reconstruction
         
     def recover_scale(self):
-        # Convert GPS to local ENU coordinates
+        # 将 GPS 转换为局部 ENU 坐标
         enu_positions = self.wgs84_to_enu(self.gps_positions)
         
-        # Find corresponding camera positions
+        # 查找对应相机位置
         correspondences = self.match_cameras_to_gps()
         
-        # Solve for similarity transform (scale, rotation, translation)
+        # 求解相似变换（尺度、旋转、平移）
         transform = self.estimate_similarity_transform(
             correspondences.reconstruction_pts,
             correspondences.gps_pts
         )
         
-        # Apply transform to full reconstruction
+        # 应用变换到完整重建
         return self.apply_transform(self.reconstruction, transform)
     
     def estimate_similarity_transform(self, src, dst):
         """
-        Estimate 7-DOF similarity transform using Horn's method
+        使用 Horn 方法估计 7-DOF 相似变换
         """
-        # Center both point sets
+        # 中心化两个点集
         src_centered = src - src.mean(axis=0)
         dst_centered = dst - dst.mean(axis=0)
         
-        # Compute scale
+        # 计算尺度
         scale = np.linalg.norm(dst_centered) / np.linalg.norm(src_centered)
         
-        # Compute rotation (SVD)
+        # 计算旋转（SVD）
         H = src_centered.T @ dst_centered
         U, S, Vt = np.linalg.svd(H)
         R = Vt.T @ U.T
         
-        # Compute translation
+        # 计算平移
         t = dst.mean(axis=0) - scale * R @ src.mean(axis=0)
         
         return Transform(scale, R, t)
 ```
 
-**Accuracy**: ±2-5 cm depending on GPS quality and image coverage
+**精度**: ±2-5 厘米，取决于 GPS 质量和图像覆盖
 
-### 3DGS Optimization for Measurement
+### 用于测量的 3DGS 优化
 
-**Modifications for Metric Accuracy**:
+**度量精度修改**:
 
 ```python
 class MeasurementOptimized3DGS:
@@ -148,20 +148,20 @@ class MeasurementOptimized3DGS:
         loss_fn = PhotometricLoss()
         
         for iteration in range(config.num_iterations):
-            # Sample random view
+            # 采样随机视图
             view_idx = random.randint(0, len(images)-1)
             rendered = self.render(cameras[view_idx])
             gt = images[view_idx]
             
-            # Primary photometric loss
+            # 主要光度损失
             photo_loss = loss_fn(rendered, gt)
             
-            # GPS constraint loss (if available)
+            # GPS 约束损失（如果可用）
             gps_loss = 0
             if gps_constraints:
                 gps_loss = self.compute_gps_constraint_loss(gps_constraints)
             
-            # Density regularization (prevent floating artifacts)
+            # 密度正则化（防止漂浮伪影）
             density_loss = self.gaussians.density_regularization()
             
             total_loss = photo_loss + 0.1 * gps_loss + 0.01 * density_loss
@@ -171,15 +171,15 @@ class MeasurementOptimized3DGS:
             self.gaussians.prune_low_opacity()
 ```
 
-### Automated Measurement Tools
+### 自动测量工具
 
-**Distance Measurement**:
+**距离测量**:
 ```python
 def measure_distance(point_a, point_b, reconstruction):
     """
-    Measure Euclidean distance between two 3D points
+    测量两个 3D 点之间的欧几里得距离
     """
-    # Ray-cast to find surface points
+    # 光线投射查找表面点
     hit_a = reconstruction.ray_cast(point_a.screen_pos)
     hit_b = reconstruction.ray_cast(point_b.screen_pos)
     
@@ -187,98 +187,186 @@ def measure_distance(point_a, point_b, reconstruction):
         distance = np.linalg.norm(hit_a.position - hit_b.position)
         return MeasurementResult(
             value=distance,
-            unit='meters',
+            unit='米',
             confidence=hit_a.confidence * hit_b.confidence
         )
     return None
 ```
 
-**Volume Measurement**:
+**体积测量**:
 ```python
 def measure_volume(region, reconstruction):
     """
-    Compute volume of selected region using mesh integration
+    使用网格积分计算选定区域的体积
     """
-    # Extract mesh in region
+    # 提取区域网格
     mesh = reconstruction.extract_mesh(region.bounds)
     
-    # Compute volume using divergence theorem
+    # 使用散度定理计算体积
     volume = mesh.compute_volume()
     
-    # Estimate uncertainty
+    # 估计不确定性
     uncertainty = self.estimate_volume_uncertainty(mesh, region)
     
     return VolumeResult(
         value=volume,
-        unit='cubic_meters',
+        unit='立方米',
         uncertainty=uncertainty,
         mesh_quality=mesh.quality_metrics()
     )
 ```
 
-## Personal Responsibilities
+## 个人职责
 
-- **Designed** GPS scale recovery algorithm integrating GPS with SfM
-- **Modified** 3DGS optimization for metric accuracy
-- **Implemented** measurement tools (distance, area, volume)
-- **Developed** Qt-based UI for interactive measurement
-- **Validated** system accuracy through field experiments
+- **设计** GPS 尺度恢复算法，将 GPS 与 SfM 集成
+- **修改** 3DGS 优化以实现度量精度
+- **实现** 测量工具（距离、面积、体积）
+- **开发** 基于 Qt 的 UI 用于交互测量
+- **验证** 通过现场实验验证系统精度
 
-## Project Outcomes
+## 项目成果
 
-### Accuracy Validation
+### 精度验证
 
-| Measurement Type | Ground Truth | System Result | Error |
-|-----------------|--------------|---------------|-------|
-| Distance (10m) | 10.00 m | 10.03 m | 0.3% |
-| Distance (50m) | 50.00 m | 50.21 m | 0.4% |
-| Area (100m²) | 100.0 m² | 101.2 m² | 1.2% |
-| Volume (500m³) | 500.0 m³ | 508.5 m³ | 1.7% |
+| 测量类型 | 真实值 | 系统结果 | 误差 |
+|---------|--------|----------|------|
+| 距离 (10m) | 10.00 m | 10.03 m | 0.3% |
+| 距离 (50m) | 50.00 m | 50.21 m | 0.4% |
+| 面积 (100m²) | 100.0 m² | 101.2 m² | 1.2% |
+| 体积 (500m³) | 500.0 m³ | 508.5 m³ | 1.7% |
 
-### Performance Metrics
+### 性能指标
 
-| Scene | Images | Processing Time | Gaussians | Accuracy |
-|-------|--------|-----------------|-----------|----------|
-| Small Cargo | 45 | 3 min | 1.2M | ±2 cm |
-| Construction Site | 230 | 15 min | 4.5M | ±5 cm |
-| Bridge Section | 180 | 12 min | 3.8M | ±3 cm |
+| 场景 | 图像数 | 处理时间 | 高斯数 | 精度 |
+|------|--------|----------|--------|------|
+| 小型货物 | 45 | 3 分钟 | 120 万 | ±2 cm |
+| 建筑工地 | 230 | 15 分钟 | 450 万 | ±5 cm |
+| 桥梁段 | 180 | 12 分钟 | 380 万 | ±3 cm |
 
-### Field Deployment
+### 现场部署
 
-- Successfully deployed for **oversized cargo verification**
-- Integrated with **logistics management system**
-- Reduced measurement time by **80%** compared to manual methods
+- 成功部署用于**超大货物验证**
+- 集成到**物流管理系统**
+- 相比手动方法测量时间减少**80%**
 
-## Demo
+## 演示
 
-### System Interface
+### 系统界面
 
-![Measurement UI](/assets/projects/measurement-system/ui-screenshot.png)
+![测量 UI](/assets/projects/measurement-system/ui-screenshot.png)
 
-*Interactive measurement interface with 3D visualization*
+*带有 3D 可视化的交互测量界面*
 
-### Reconstruction Example
+### 重建示例
 
-![3D Reconstruction](/assets/projects/measurement-system/reconstruction-demo.png)
+![3D 重建](/assets/projects/measurement-system/reconstruction-demo.png)
 
-*3DGS reconstruction with measurement annotations*
+*带有测量标注的 3DGS 重建*
 
-### Accuracy Comparison
+### 精度对比
 
-| Method | Time | Accuracy | Cost |
-|--------|------|----------|------|
-| Manual Tape | 45 min | ±1 cm | Low |
-| Total Station | 30 min | ±0.5 cm | High |
-| **Our System** | **8 min** | **±3 cm** | **Medium** |
-| LiDAR Scanner | 15 min | ±1 cm | Very High |
+| 方法 | 时间 | 精度 | 成本 |
+|------|------|------|------|
+| 手动卷尺 | 45 分钟 | ±1 cm | 低 |
+| 全站仪 | 30 分钟 | ±0.5 cm | 高 |
+| **本系统** | **8 分钟** | **±3 cm** | **中** |
+| LiDAR 扫描仪 | 15 分钟 | ±1 cm | 很高 |
 
-## Related Projects
+## 画廊
 
-- [3DGS Rendering Engine](/projects/3dgs-engine) - Core rendering technology
-- [3D Reconstruction Research](/projects/reconstruction-research) - Underlying research
+<div class="gallery-grid">
 
-## References
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/measurement-system/ui-screenshot.png" alt="测量 UI" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>测量界面</h4>
+    <p>交互式尺寸测量</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/measurement-system/reconstruction-demo.png" alt="3D 重建" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>3D 重建</h4>
+    <p>从图像重建 3D 几何</p>
+  </div>
+</div>
+
+</div>
+
+## 相关项目
+
+- [3DGS 渲染引擎](/projects/3dgs-engine) - 核心渲染技术
+- [三维重建研究](/projects/reconstruction-research) - 基础研究
+
+## 参考文献
 
 1. Kerbl, B., et al. "3D Gaussian Splatting for Real-Time Radiance Field Rendering." SIGGRAPH 2023.
 2. Schönberger, J.L., et al. "Structure-from-Motion Revisited." CVPR 2016.
 3. Horn, B.K.P. "Closed-form solution of absolute orientation using unit quaternions." JOSA A, 1987.
+
+<style>
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-alt);
+}
+
+.gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-info {
+  padding: 1.25rem;
+}
+
+.gallery-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--vp-c-brand);
+}
+
+.gallery-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+</style>

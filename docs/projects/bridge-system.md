@@ -1,109 +1,109 @@
 ---
-title: Bridge Digital Twin (UE)
-description: Unreal Engine-based digital twin system with IoT sensor integration for real-time structural health monitoring and visualization.
+title: 桥梁数字孪生 (UE)
+description: 基于 Unreal Engine 的数字孪生系统，集成 IoT 传感器数据用于桥梁结构健康监测和可视化。
 ---
 
-# Bridge Digital Twin (UE)
+# 桥梁数字孪生 (UE)
 
-An industrial digital twin platform built on Unreal Engine 5, integrating real-time IoT sensor data streams for bridge structural monitoring, with advanced visualization and alert systems.
+基于 Unreal Engine 5 的工业数字孪生平台，集成实时 IoT 传感器数据流用于桥梁结构监测，具有高级可视化和警报系统。
 
-## Project Background
+## 项目背景
 
-### Problem Statement
+### 问题陈述
 
-Bridge infrastructure management faces critical challenges:
+桥梁基础设施管理面临关键挑战：
 
-- **Data Silos**: Sensor data scattered across multiple systems
-- **Limited Visualization**: 2D dashboards lack spatial context
-- **Reactive Maintenance**: Issues detected after damage occurs
-- **Stakeholder Communication**: Technical data hard to interpret
-- **Historical Analysis**: Limited trend visualization capabilities
+- **数据孤岛**: 传感器数据分散在多个系统中
+- **可视化受限**: 2D 仪表盘缺乏空间上下文
+- **被动维护**: 问题在损坏后才被发现
+- **利益相关者沟通**: 技术数据难以解释
+- **历史分析**: 有限的趋势可视化能力
 
-### Industry Context
+### 行业背景
 
-Digital twin technology enables:
+数字孪生技术实现：
 
-- **Real-time Monitoring**: Live sensor data visualization
-- **Predictive Maintenance**: AI-driven anomaly detection
-- **Immersive Inspection**: Virtual bridge tours
-- **Data Integration**: Unified platform for all monitoring data
-- **Decision Support**: Visual analytics for stakeholders
+- **实时监控**: 实时传感器数据可视化
+- **预测性维护**: AI 驱动的异常检测
+- **沉浸式检查**: 虚拟桥梁游览
+- **数据集成**: 所有监控数据的统一平台
+- **决策支持**: 利益相关者的可视化分析
 
-## System Architecture
+## 系统架构
 
 ```mermaid
 graph TB
-    subgraph Physical Bridge
-        A[Strain Gauges] --> B[Data Logger]
-        C[Accelerometers] --> B
-        D[Tilt Sensors] --> B
-        E[Temperature Sensors] --> B
-        F[Load Cells] --> B
-        B --> G[Edge Gateway]
+    subgraph 物理桥梁
+        A[应变计] --> B[数据记录器]
+        C[加速度计] --> B
+        D[倾斜传感器] --> B
+        E[温度传感器] --> B
+        F[载荷传感器] --> B
+        B --> G[边缘网关]
     end
     
-    subgraph Cloud Infrastructure
-        G --> H[MQTT Broker]
-        H --> I[Stream Processor]
-        I --> J[Time Series DB]
-        J --> K[Analytics Engine]
-        K --> L[Alert Service]
+    subgraph 云基础设施
+        G --> H[MQTT 代理]
+        H --> I[流处理器]
+        I --> J[时序数据库]
+        J --> K[分析引擎]
+        K --> L[警报服务]
     end
     
-    subgraph Digital Twin
-        M[UE5 Client] --> N[REST API]
+    subgraph 数字孪生
+        M[UE5 客户端] --> N[REST API]
         M --> O[WebSocket]
-        N --> P[Application Server]
+        N --> P[应用服务器]
         O --> P
         P --> J
         P --> L
-        P --> Q[3D Model Service]
+        P --> Q[3D 模型服务]
     end
     
-    subgraph User Interfaces
-        M --> R[Desktop Client]
-        M --> S[VR Headset]
-        M --> T[Web Dashboard]
+    subgraph 用户界面
+        M --> R[桌面客户端]
+        M --> S[VR 头显]
+        M --> T[Web 仪表盘]
     end
 ```
 
-### Module Overview
+### 模块概述
 
-| Module | Responsibility | Technology |
-|--------|---------------|------------|
-| **IoT Gateway** | Sensor data ingestion, protocol conversion | MQTT, Modbus |
-| **Stream Processor** | Real-time data processing, filtering | Apache Kafka, Flink |
-| **Time Series DB** | Historical data storage | InfluxDB, TimescaleDB |
-| **Analytics Engine** | Anomaly detection, trend analysis | Python, scikit-learn |
-| **UE5 Client** | 3D visualization, interaction | Unreal Engine 5, C++ |
-| **Alert Service** | Threshold monitoring, notifications | Redis, WebSocket |
+| 模块 | 职责 | 技术 |
+|------|------|------|
+| **IoT 网关** | 传感器数据摄入、协议转换 | MQTT, Modbus |
+| **流处理器** | 实时数据处理、过滤 | Apache Kafka, Flink |
+| **时序 DB** | 历史数据存储 | InfluxDB, TimescaleDB |
+| **分析引擎** | 异常检测、趋势分析 | Python, scikit-learn |
+| **UE5 客户端** | 3D 可视化、交互 | Unreal Engine 5, C++ |
+| **警报服务** | 阈值监控、通知 | Redis, WebSocket |
 
-### Data Flow
+### 数据流
 
-1. **Sensing**: Sensors collect data at 1-100 Hz sampling rates
-2. **Transmission**: Edge gateway sends data via MQTT to cloud
-3. **Processing**: Stream processor validates, filters, aggregates
-4. **Storage**: Time series database stores historical data
-5. **Visualization**: UE5 client renders real-time data on 3D model
-6. **Alerting**: System triggers alerts for threshold violations
+1. **传感**: 传感器以 1-100 Hz 采样率收集数据
+2. **传输**: 边缘网关通过 MQTT 发送数据到云端
+3. **处理**: 流处理器验证、过滤、聚合
+4. **存储**: 时序数据库存储历史数据
+5. **可视化**: UE5 客户端在 3D 模型上渲染实时数据
+6. **警报**: 系统触发阈值违规警报
 
-### Technology Stack
+### 技术栈
 
-- **Game Engine**: Unreal Engine 5.2
-- **Programming**: C++17, Python 3.10, Blueprints
-- **IoT Protocol**: MQTT, OPC-UA
-- **Database**: InfluxDB, PostgreSQL
-- **Streaming**: Apache Kafka
-- **Cloud**: AWS IoT Core, Lambda, S3
+- **游戏引擎**: Unreal Engine 5.2
+- **编程**: C++17, Python 3.10, Blueprints
+- **IoT 协议**: MQTT, OPC-UA
+- **数据库**: InfluxDB, PostgreSQL
+- **流式传输**: Apache Kafka
+- **云**: AWS IoT Core, Lambda, S3
 
-## Core Technologies
+## 核心技术
 
-### IoT Data Integration
+### IoT 数据集成
 
-**MQTT Data Ingestion**:
+**MQTT 数据摄入**:
 
 ```cpp
-// UE5 C++ - MQTT Client for sensor data
+// UE5 C++ - MQTT 客户端用于传感器数据
 class UBridgeSensorManager : public UObject
 {
     GENERATED_BODY()
@@ -127,14 +127,14 @@ public:
 
     void Initialize()
     {
-        // Connect to MQTT broker
+        // 连接到 MQTT 代理
         MQTTClient = MakeShareable(new FMQTTClient);
         MQTTClient->OnMessageReceived.AddUObject(
             this, 
             &UBridgeSensorManager::HandleSensorMessage
         );
         
-        // Subscribe to sensor topics
+        // 订阅传感器主题
         MQTTClient->Subscribe("bridge/sensors/strain/#");
         MQTTClient->Subscribe("bridge/sensors/acceleration/#");
         MQTTClient->Subscribe("bridge/sensors/tilt/#");
@@ -143,7 +143,7 @@ public:
 
     void HandleSensorMessage(const FMQTTMessage& Message)
     {
-        // Parse JSON payload
+        // 解析 JSON 负载
         TSharedPtr<FJsonObject> JsonObject;
         TJsonReaderFactory<>::Create(Message.Payload);
         FJsonSerializer::Deserialize(JsonReader, JsonObject);
@@ -155,29 +155,29 @@ public:
         Data.Timestamp = JsonObject->GetNumberField("timestamp");
         Data.Unit = JsonObject->GetStringField("unit");
 
-        // Update latest data
+        // 更新最新数据
         LatestSensorData[Data.SensorId] = Data;
 
-        // Update history (circular buffer)
+        // 更新历史（循环缓冲区）
         UpdateSensorHistory(Data);
 
-        // Check thresholds
+        // 检查阈值
         CheckAlerts(Data);
 
-        // Update visualization
+        // 更新可视化
         UpdateSensorVisualization(Data);
     }
 
     void UpdateSensorVisualization(const FSensorData& Data)
     {
-        // Find associated 3D component
+        // 查找关联的 3D 组件
         UStaticMeshComponent* Component = SensorComponents[Data.SensorId];
         if (!Component) return;
 
-        // Update material based on value
+        // 基于值更新材质
         UMaterialInstanceDynamic* MID = Component->CreateDynamicMaterialInstance(0);
         
-        // Color mapping: Green (normal) -> Yellow (warning) -> Red (critical)
+        // 颜色映射：绿色（正常）→ 黄色（警告）→ 红色（危急）
         float NormalizedValue = NormalizeValue(Data.Value, Data.SensorType);
         FLinearColor Color = GetValueColor(NormalizedValue);
         
@@ -187,12 +187,12 @@ public:
 };
 ```
 
-### Real-time Visualization System
+### 实时可视化系统
 
-**Sensor Overlay Rendering**:
+**传感器叠加渲染**:
 
 ```cpp
-// UE5 - Sensor value visualization on 3D model
+// UE5 - 3D 模型上的传感器值可视化
 class USensorOverlayWidget : public UUserWidget
 {
     GENERATED_BODY()
@@ -212,7 +212,7 @@ protected:
 
     void UpdateDisplay(const FSensorData& Data)
     {
-        // Format value with units
+        // 格式化值与单位
         FString ValueString = FString::Printf(
             TEXT("%.2f %s"), 
             Data.Value, 
@@ -220,18 +220,18 @@ protected:
         );
         SensorValueText->SetText(FText::FromString(ValueString));
 
-        // Update progress bar
+        // 更新进度条
         float NormalizedValue = NormalizeValue(Data.Value, Data.SensorType);
         ValueProgressBar->SetPercent(NormalizedValue);
 
-        // Update status indicator color
+        // 更新状态指示器颜色
         FLinearColor StatusColor = GetStatusColor(Data.Value, Data.SensorType);
         StatusMaterial->SetVectorParameterValue(
             FName("StatusColor"), 
             StatusColor
         );
 
-        // Animate on value change
+        // 值变化时动画
         if (FMath::Abs(NormalizedValue - LastNormalizedValue) > 0.1f)
         {
             PlayAnimation(PulseAnimation);
@@ -241,29 +241,29 @@ protected:
 
     FLinearColor GetStatusColor(double Value, const FString& Type)
     {
-        // Get thresholds for sensor type
+        // 获取传感器类型的阈值
         FThresholds Thresholds = SensorThresholds[Type];
         
         if (FMath::Abs(Value) < Thresholds.Warning)
         {
-            return FLinearColor::Green;  // Normal
+            return FLinearColor::Green;  // 正常
         }
         else if (FMath::Abs(Value) < Thresholds.Critical)
         {
-            return FLinearColor::Yellow;  // Warning
+            return FLinearColor::Yellow;  // 警告
         }
         else
         {
-            return FLinearColor::Red;  // Critical
+            return FLinearColor::Red;  // 危急
         }
     }
 };
 ```
 
-**Time-series Chart Widget**:
+**时序图表组件**:
 
 ```cpp
-// UE5 - Real-time chart for sensor trends
+// UE5 - 传感器趋势实时图表
 class USensorChartWidget : public UUserWidget
 {
     GENERATED_BODY()
@@ -273,7 +273,7 @@ protected:
     TArray<float> ChartValues;
 
     UPROPERTY()
-    int32 MaxDataPoints = 300;  // 5 minutes at 1 Hz
+    int32 MaxDataPoints = 300;  // 1Hz 下 5 分钟
 
     UPROPERTY(meta = (BindWidget))
     UCanvasPanel* ChartCanvas;
@@ -282,30 +282,30 @@ protected:
     {
         ChartValues.Add(Value);
         
-        // Maintain fixed window size
+        // 维持固定窗口大小
         if (ChartValues.Num() > MaxDataPoints)
         {
             ChartValues.RemoveAt(0);
         }
 
-        // Redraw chart
+        // 重绘图表
         DrawChart();
     }
 
     void DrawChart()
     {
-        // Clear previous
+        // 清除之前的
         ChartCanvas->ClearChildren();
 
         if (ChartValues.Num() < 2) return;
 
-        // Draw grid lines
+        // 绘制网格线
         DrawGridLines();
 
-        // Draw threshold lines
+        // 绘制阈值线
         DrawThresholdLines();
 
-        // Draw data line
+        // 绘制数据线
         TArray<FVector2D> Points;
         for (int32 i = 0; i < ChartValues.Num(); i++)
         {
@@ -314,25 +314,25 @@ protected:
             Points.Add(FVector2D(X, Y));
         }
 
-        // Draw line segments
+        // 绘制线段
         for (int32 i = 0; i < Points.Num() - 1; i++)
         {
             UImage* Segment = CreateLineSegment(Points[i], Points[i + 1]);
             ChartCanvas->AddChild(Segment);
         }
 
-        // Draw current value indicator
+        // 绘制当前值指示器
         DrawCurrentValueMarker(Points.Last());
     }
 };
 ```
 
-### Anomaly Detection
+### 异常检测
 
-**ML-based Anomaly Detection**:
+**基于 ML 的异常检测**:
 
 ```python
-# Python - Anomaly detection service
+# Python - 异常检测服务
 import numpy as np
 from sklearn.ensemble import IsolationForest
 from scipy import stats
@@ -340,22 +340,22 @@ from scipy import stats
 class BridgeAnomalyDetector:
     def __init__(self, config):
         self.config = config
-        self.models = {}  # Per-sensor-type models
+        self.models = {}  # 每个传感器类型的模型
         self.baseline_data = {}
         
     def train_baseline(self, sensor_data: Dict[str, List[float]]):
         """
-        Train anomaly detection models on historical baseline data
+        在历史基线数据上训练异常检测模型
         """
         for sensor_type, values in sensor_data.items():
-            # Statistical baseline
+            # 统计基线
             self.baseline_data[sensor_type] = {
                 'mean': np.mean(values),
                 'std': np.std(values),
                 'percentiles': np.percentile(values, [1, 5, 95, 99])
             }
             
-            # Isolation Forest for complex patterns
+            # 孤立森林用于复杂模式
             X = np.array(values).reshape(-1, 1)
             model = IsolationForest(
                 contamination=0.01,
@@ -366,21 +366,21 @@ class BridgeAnomalyDetector:
     
     def detect_anomaly(self, sensor_id: str, sensor_type: str, value: float) -> AnomalyResult:
         """
-        Detect if current reading is anomalous
+        检测当前读数是否异常
         """
         baseline = self.baseline_data.get(sensor_type)
         if not baseline:
             return AnomalyResult(is_anomaly=False, confidence=0.0)
         
-        # Statistical test (Z-score)
+        # 统计检验（Z 分数）
         z_score = abs(value - baseline['mean']) / baseline['std']
         
-        # Percentile check
+        # 百分位数检查
         percentile = stats.percentileofscore(
             baseline['percentiles'], value
         )
         
-        # ML-based detection
+        # 基于 ML 的检测
         model = self.models.get(sensor_type)
         if model:
             ml_prediction = model.predict([[value]])[0]
@@ -388,10 +388,10 @@ class BridgeAnomalyDetector:
         else:
             ml_anomaly = False
         
-        # Combine signals
+        # 组合信号
         is_anomaly = (
-            z_score > 3.0 or  # 3-sigma rule
-            percentile < 1 or percentile > 99 or  # Outside 99%
+            z_score > 3.0 or  # 3-sigma 规则
+            percentile < 1 or percentile > 99 or  # 超出 99%
             ml_anomaly
         )
         
@@ -406,13 +406,13 @@ class BridgeAnomalyDetector:
     
     def detect_trend_anomaly(self, sensor_history: List[float]) -> TrendResult:
         """
-        Detect anomalous trends (drift, sudden changes)
+        检测异常趋势（漂移、突然变化）
         """
-        # Linear trend analysis
+        # 线性趋势分析
         x = np.arange(len(sensor_history))
         slope, intercept, r_value, p_value, std_err = stats.linregress(x, sensor_history)
         
-        # Change point detection
+        # 变点检测
         cusum = np.cumsum(sensor_history - np.mean(sensor_history))
         change_points = self._detect_cusum_change_points(cusum)
         
@@ -424,12 +424,12 @@ class BridgeAnomalyDetector:
         )
 ```
 
-### Alert System
+### 警报系统
 
-**Multi-channel Alerting**:
+**多渠道警报**:
 
 ```cpp
-// UE5 - Alert management system
+// UE5 - 警报管理系统
 class UAlertManager : public UObject
 {
     GENERATED_BODY()
@@ -478,105 +478,213 @@ public:
 
             ActiveAlerts.Add(NewAlert);
 
-            // Notify subscribers
+            // 通知订阅者
             OnAlertGenerated.Broadcast(NewAlert);
 
-            // Send external notifications
+            // 发送外部通知
             SendExternalNotifications(NewAlert);
         }
     }
 
     void SendExternalNotifications(const FAlert& Alert)
     {
-        // Email notification
+        // 邮件通知
         if (Alert.Severity >= EAlertSeverity::Warning)
         {
             SendEmailNotification(Alert);
         }
 
-        // SMS for critical alerts
+        // 短信用于危急警报
         if (Alert.Severity >= EAlertSeverity::Critical)
         {
             SendSMSNotification(Alert);
         }
 
-        // Webhook integration (for incident management systems)
+        // Webhook 集成（用于事件管理系统）
         SendWebhookNotification(Alert);
     }
 };
 ```
 
-## Personal Responsibilities
+## 个人职责
 
-- **Architected** IoT data integration pipeline (MQTT → UE5)
-- **Implemented** real-time sensor visualization system
-- **Designed** anomaly detection algorithms with ML integration
-- **Developed** multi-channel alert system
-- **Created** VR inspection interface for remote bridge assessment
+- **架构设计** IoT 数据集成管线（MQTT → UE5）
+- **实现** 实时传感器可视化系统
+- **设计** 异常检测算法与 ML 集成
+- **开发** 多渠道警报系统
+- **创建** VR 检查界面用于远程桥梁评估
 
-## Project Outcomes
+## 项目成果
 
-### System Performance
+### 系统性能
 
-| Metric | Value |
-|--------|-------|
-| Sensor Update Latency | <200 ms |
-| Data Throughput | 10,000 msg/s |
-| Historical Query Time | <100 ms |
-| Visualization FPS | 60+ (4K) |
-| System Uptime | 99.9% |
+| 指标 | 值 |
+|------|-----|
+| 传感器更新延迟 | <200 ms |
+| 数据吞吐量 | 10,000 msg/s |
+| 历史查询时间 | <100 ms |
+| 可视化 FPS | 60+ (4K) |
+| 系统正常运行时间 | 99.9% |
 
-### Deployment Statistics
+### 部署统计
 
-| Metric | Value |
-|--------|-------|
-| Sensors Monitored | 450+ |
-| Data Points/Day | 50M+ |
-| Alert Accuracy | 94% |
-| False Positive Rate | 3% |
-| Mean Time to Detection | 2.3 minutes |
+| 指标 | 值 |
+|------|------|
+| 监控传感器 | 450+ |
+| 每天数据点 | 5000 万+ |
+| 警报准确率 | 94% |
+| 误报率 | 3% |
+| 平均检测时间 | 2.3 分钟 |
 
-### Business Impact
+### 业务影响
 
-- **Reduced Inspection Costs**: 60% reduction in manual inspections
-- **Early Damage Detection**: 3 major issues detected before failure
-- **Stakeholder Engagement**: 10x increase in data review frequency
-- **Maintenance Planning**: Data-driven scheduling reduced costs by 35%
+- **减少检查成本**: 手动检查减少 60%
+- **早期损坏检测**: 在故障前检测到 3 个主要问题
+- **利益相关者参与**: 数据审查频率增加 10 倍
+- **维护规划**: 数据驱动调度减少成本 35%
 
-## Demo
+## 演示
 
-### Digital Twin Interface
+### 数字孪生界面
 
-![Digital Twin UI](/assets/projects/bridge-system/digital-twin-ui.png)
+![数字孪生 UI](/assets/projects/bridge-system/digital-twin-ui.png)
 
-*Real-time sensor visualization on 3D bridge model*
+*3D 桥梁模型上的实时传感器可视化*
 
-### Alert Dashboard
+### 警报仪表盘
 
-![Alert Dashboard](/assets/projects/bridge-system/alert-dashboard.png)
+![警报仪表盘](/assets/projects/bridge-system/alert-dashboard.png)
 
-*Active alerts with severity indicators and recommended actions*
+*带有严重性指示器和建议操作的活动警报*
 
-### VR Inspection Mode
+### VR 检查模式
 
-![VR Inspection](/assets/projects/bridge-system/vr-inspection.png)
+![VR 检查](/assets/projects/bridge-system/vr-inspection.png)
 
-*Virtual reality interface for immersive bridge inspection*
+*用于沉浸式桥梁检查的虚拟现实界面*
 
-### Historical Trend Analysis
+### 历史趋势分析
 
-![Trend Analysis](/assets/projects/bridge-system/trend-analysis.png)
+![趋势分析](/assets/projects/bridge-system/trend-analysis.png)
 
-*Multi-sensor trend visualization with anomaly detection*
+*带有异常检测的多传感器趋势可视化*
 
-## Related Projects
+## 画廊
 
-- [SLAM + UAV System](/projects/slam-system) - Complementary inspection technology
-- [LLM Agent Platform](/projects/agent-platform) - AI-powered analysis integration
+<div class="gallery-grid">
 
-## References
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/bridge-system/digital-twin-ui.png" alt="数字孪生 UI" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>数字孪生界面</h4>
+    <p>实时传感器监控</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/bridge-system/alert-dashboard.png" alt="警报仪表盘" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>警报仪表盘</h4>
+    <p>活动警报监控</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/bridge-system/vr-inspection.png" alt="VR 检查" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>VR 检查</h4>
+    <p>虚拟现实检查模式</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/bridge-system/trend-analysis.png" alt="趋势分析" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>趋势分析</h4>
+    <p>历史数据分析</p>
+  </div>
+</div>
+
+</div>
+
+## 相关项目
+
+- [SLAM + 无人机系统](/projects/slam-system) - 互补检测技术
+- [大模型 Agent 平台](/projects/agent-platform) - AI 驱动分析集成
+
+## 参考文献
 
 1. Epic Games. "Unreal Engine 5 Documentation." https://docs.unrealengine.com/
 2. InfluxData. "InfluxDB Documentation." https://docs.influxdata.com/
 3. Liu, Y., et al. "Digital Twin for Bridge Structural Health Monitoring." Structural Health Monitoring, 2023.
 4. Breiman, L. "Random Forests." Machine Learning, 2001.
+
+<style>
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-alt);
+}
+
+.gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-info {
+  padding: 1.25rem;
+}
+
+.gallery-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--vp-c-brand);
+}
+
+.gallery-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+</style>

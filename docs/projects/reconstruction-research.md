@@ -1,111 +1,111 @@
 ---
-title: 3D Reconstruction Research
-description: Research on high-performance rendering engines, Gaussian point cloud optimization, and rendering-semantic fusion techniques.
+title: 三维重建研究
+description: 高性能渲染引擎研究，包括高斯点云优化和渲染 - 语义融合技术。
 ---
 
-# 3D Reconstruction Research
+# 三维重建研究
 
-Advanced research project exploring next-generation 3D reconstruction methods, including optimized Gaussian representations, neural rendering improvements, and semantic-aware scene understanding.
+先进的研究项目，探索下一代 3D 重建方法，包括优化的高斯表示、神经渲染改进和语义感知的场景理解。
 
-## Project Background
+## 项目背景
 
-### Problem Statement
+### 问题陈述
 
-Current 3D reconstruction techniques face fundamental challenges:
+当前 3D 重建技术面临根本性挑战：
 
-- **Memory Efficiency**: High-resolution scenes require gigabytes of storage
-- **Rendering Quality**: Artifacts in novel views, especially at boundaries
-- **Semantic Understanding**: Geometry without semantic meaning limits applications
-- **Dynamic Scenes**: Most methods assume static environments
-- **Real-time Performance**: Trade-off between quality and speed
+- **内存效率**: 高分辨率场景需要 GB 级存储
+- **渲染质量**: 新视角中的伪影，尤其是边界处
+- **语义理解**: 没有语义意义的几何限制应用
+- **动态场景**: 大多数方法假设静态环境
+- **实时性能**: 质量与速度之间的权衡
 
-### Research Context
+### 研究背景
 
-This research advances the state-of-the-art in:
+本研究推进以下领域的最先进技术：
 
-- **3D Gaussian Splatting**: Improving the breakthrough SIGGRAPH 2023 technique
-- **Neural Rendering**: Combining explicit and implicit representations
-- **Semantic Fusion**: Integrating geometry with scene understanding
-- **Compression**: Efficient storage and streaming of 3D scenes
+- **3D 高斯泼溅**: 改进 SIGGRAPH 2023 突破性技术
+- **神经渲染**: 结合显式和隐式表示
+- **语义融合**: 几何与场景理解的集成
+- **压缩**: 3D 场景的高效存储和流式传输
 
-## System Architecture
+## 系统架构
 
 ```mermaid
 graph TB
-    subgraph Input
-        A[Multi-view Images] --> B[Feature Extraction]
-        C[Camera Poses] --> B
+    subgraph 输入
+        A[多视图图像] --> B[特征提取]
+        C[相机位姿] --> B
     end
     
-    subgraph Core Pipeline
-        B --> D[Initial Gaussian Generation]
-        D --> E[Gaussian Optimization]
-        E --> F[Adaptive Refinement]
-        F --> G[Semantic Labeling]
-        G --> H[Compression]
+    subgraph 核心管线
+        B --> D[初始高斯生成]
+        D --> E[高斯优化]
+        E --> F[自适应细化]
+        F --> G[语义标注]
+        G --> H[压缩]
     end
     
-    subgraph Output
-        H --> I[Optimized Scene]
-        I --> J[Real-time Renderer]
-        I --> K[Analysis Tools]
-        I --> L[Export Formats]
+    subgraph 输出
+        H --> I[优化场景]
+        I --> J[实时渲染器]
+        I --> K[分析工具]
+        I --> L[导出格式]
     end
     
-    subgraph Research Modules
-        E --> M[Novel Representations]
-        F --> N[Error Metrics]
-        G --> O[Semantic Fusion]
-        H --> P[Compression Algorithms]
+    subgraph 研究模块
+        E --> M[新表示]
+        F --> N[误差度量]
+        G --> O[语义融合]
+        H --> P[压缩算法]
     end
 ```
 
-### Research Modules
+### 研究模块
 
-| Module | Focus Area | Status |
-|--------|-----------|--------|
-| **Gaussian Optimization** | Density control, opacity regularization | Published |
-| **Semantic Fusion** | 2D segmentation → 3D labels | In Progress |
-| **Dynamic Scenes** | 4D Gaussian representations | In Progress |
-| **Compression** | Quantization, pruning, entropy coding | Published |
-| **Anti-aliasing** | Mipmapping for Gaussian splats | Published |
+| 模块 | 重点领域 | 状态 |
+|------|---------|------|
+| **高斯优化** | 密度控制、不透明度正则化 | 已发表 |
+| **语义融合** | 2D 分割 → 3D 标签 | 进行中 |
+| **动态场景** | 4D 高斯表示 | 进行中 |
+| **压缩** | 量化、剪枝、熵编码 | 已发表 |
+| **抗锯齿** | 高斯泼溅的 Mipmap | 已发表 |
 
-### Technology Stack
+### 技术栈
 
-- **Core Language**: Python 3.10, C++17, CUDA
-- **Deep Learning**: PyTorch 2.0, CUDA 11.8
-- **Optimization**: Custom CUDA kernels
-- **Visualization**: Open3D, Polyscope
-- **Experiment Tracking**: Weights & Biases, TensorBoard
+- **核心语言**: Python 3.10, C++17, CUDA
+- **深度学习**: PyTorch 2.0, CUDA 11.8
+- **优化**: 自定义 CUDA 内核
+- **可视化**: Open3D, Polyscope
+- **实验跟踪**: Weights & Biases, TensorBoard
 
-## Core Technologies
+## 核心技术
 
-### Optimized Gaussian Representations
+### 优化高斯表示
 
-**Problem**: Original 3DGS uses isotropic covariances, limiting expressiveness
+**问题**: 原始 3DGS 使用各向同性协方差，限制表达能力
 
-**Our Approach - Anisotropic Gaussians**:
+**我们的方法 - 各向异性高斯**:
 
 ```python
 class AnisotropicGaussian:
     """
-    Extended Gaussian representation with full covariance
+    扩展高斯表示与完整协方差
     """
     def __init__(self, position, covariance, opacity, sh_coefficients):
-        self.position = position  # 3D center
-        self.covariance = covariance  # 3x3 symmetric positive definite
-        self.opacity = opacity  # Scalar
-        self.sh_coefficients = sh_coefficients  # Spherical harmonics
+        self.position = position  # 3D 中心
+        self.covariance = covariance  # 3x3 对称正定
+        self.opacity = opacity  # 标量
+        self.sh_coefficients = sh_coefficients  # 球谐系数
         
     def to_spherical_covariance(self):
         """
-        Parameterize covariance using spherical coordinates
-        for stable optimization
+        使用球坐标参数化协方差
+        用于稳定优化
         """
-        # Eigenvalue decomposition: Σ = R Λ R^T
+        # 特征值分解：Σ = R Λ R^T
         eigenvalues, eigenvectors = torch.linalg.eigh(self.covariance)
         
-        # Parameterize as: scales (3) + rotation (quaternion, 4)
+        # 参数化为：尺度 (3) + 旋转（四元数，4）
         scales = torch.sqrt(eigenvalues)
         rotation = matrix_to_quaternion(eigenvectors)
         
@@ -113,39 +113,39 @@ class AnisotropicGaussian:
     
     def render(self, camera, pixel_coords):
         """
-        Project Gaussian to screen space and evaluate
+        将高斯投影到屏幕空间并评估
         """
-        # Transform to camera space
+        # 变换到相机空间
         gauss_camera = self.transform_to_camera(camera)
         
-        # Project to screen space (Jacobian of projection)
+        # 投影到屏幕空间（投影的雅可比）
         J = camera.projection_jacobian(gauss_camera.position)
         
-        # Screen-space covariance: Σ' = J Σ J^T
+        # 屏幕空间协方差：Σ' = J Σ J^T
         cov_screen = J @ gauss_camera.covariance @ J.T
         
-        # Evaluate 2D Gaussian at pixel
+        # 在像素处评估 2D 高斯
         diff = pixel_coords - gauss_camera.screen_position
         exponent = -0.5 * diff.T @ torch.inverse(cov_screen) @ diff
         
         return gauss_camera.opacity * torch.exp(exponent)
 ```
 
-**Results**:
-- 40% reduction in Gaussian count for same quality
-- Better representation of thin structures and edges
-- Improved rendering of reflective surfaces
+**结果**:
+- 相同质量下高斯数量减少**40%**
+- 更好表示薄结构和边缘
+- 改进反射表面渲染
 
-### Adaptive Density Control
+### 自适应密度控制
 
-**Problem**: Fixed Gaussian density leads to over/under-reconstruction
+**问题**: 固定高斯密度导致过度/欠重建
 
-**Our Solution**:
+**我们的解决方案**:
 
 ```python
 class AdaptiveDensityController:
     """
-    Dynamically adjusts Gaussian density during optimization
+    优化期间动态调整高斯密度
     """
     def __init__(self, config):
         self.config = config
@@ -155,23 +155,23 @@ class AdaptiveDensityController:
         
     def step(self, gaussians, gradients, iteration):
         """
-        Perform density control every N iterations
+        每 N 次迭代执行密度控制
         """
         if iteration % self.config.control_interval != 0:
             return
         
-        # Clone large Gaussians (split)
+        # 克隆大高斯（分裂）
         large_mask = self._get_large_gaussians(gaussians)
         if large_mask.any():
             cloned = self._clone_gaussians(gaussians[large_mask])
             gaussians = self.merge(gaussians, cloned)
         
-        # Prune small/transparent Gaussians
+        # 剪枝小/透明高斯
         prune_mask = self._get_prune_mask(gaussians)
         if prune_mask.any():
             gaussians = self.prune(gaussians, prune_mask)
         
-        # Densify based on gradients
+        # 基于梯度致密化
         densify_mask = self._get_densify_mask(gradients)
         if densify_mask.any():
             new_gaussians = self._initialize_gaussians(
@@ -184,16 +184,16 @@ class AdaptiveDensityController:
     
     def _get_densify_mask(self, gradients):
         """
-        Identify regions needing more Gaussians based on gradients
+        基于梯度识别需要更多高斯的区域
         """
-        # Average gradient magnitude per Gaussian
+        # 每个高斯的平均梯度幅值
         grad_magnitudes = gradients.norm(dim=-1).mean(dim=-1)
         
-        # Normalize by local density
+        # 按局部密度归一化
         local_density = self._compute_local_density()
         normalized_grads = grad_magnitudes / (local_density + 1e-6)
         
-        # Select top-K for densification
+        # 选择 top-K 进行致密化
         threshold = torch.quantile(
             normalized_grads, 
             1 - self.config.densification_rate
@@ -202,49 +202,49 @@ class AdaptiveDensityController:
         return normalized_grads > threshold
 ```
 
-**Benefits**:
-- Automatic scene complexity adaptation
-- 30% faster convergence
-- Better handling of fine details
+**优势**:
+- 自动场景复杂度适应
+- **30%** 更快收敛
+- 更好处理精细细节
 
-### Semantic Fusion
+### 语义融合
 
-**Approach**: Lift 2D semantic segmentation to 3D Gaussians
+**方法**: 将 2D 语义分割提升到 3D 高斯
 
 ```python
 class SemanticGaussianMapper:
     """
-    Fuses 2D semantic labels with 3D Gaussian geometry
+    将 2D 语义标签与 3D 高斯几何融合
     """
     def __init__(self, num_classes, config):
         self.num_classes = num_classes
         self.config = config
         
-        # Per-Gaussian semantic distribution
+        # 每个高斯的语义分布
         self.semantic_logits = None  # [N, num_classes]
         
     def fuse(self, gaussians, images, segmentations, cameras):
         """
-        Lift 2D segmentation to 3D semantic labels
+        将 2D 分割提升到 3D 语义标签
         """
         N = len(gaussians)
         self.semantic_logits = torch.zeros(
             N, self.num_classes, device=gaussians.device
         )
         
-        # Accumulate evidence from all views
+        # 从所有视图累积证据
         for img, seg, cam in zip(images, segmentations, cameras):
-            # Render Gaussian indices to this view
+            # 渲染高斯索引到此视图
             indices, depths = self._render_indices(gaussians, cam)
             
-            # Sample segmentation at projected locations
+            # 在投影位置采样分割
             seg_values = self._sample_segmentation(seg, indices)
             
-            # Accumulate with depth-weighted voting
+            # 带有深度加权投票的累积
             weights = torch.exp(-depths / self.config.depth_scale)
             self._accumulate_votes(indices, seg_values, weights)
         
-        # Apply CRF smoothing for consistency
+        # 应用 CRF 平滑保证一致性
         self.semantic_logits = self._apply_crf_smoothing(
             self.semantic_logits, gaussians
         )
@@ -253,12 +253,12 @@ class SemanticGaussianMapper:
     
     def _apply_crf_smoothing(self, logits, gaussians):
         """
-        Conditional Random Field for spatial consistency
+        条件随机场用于空间一致性
         """
-        # Pairwise potential based on Gaussian proximity
+        # 基于高斯邻近的成对势
         affinity = self._compute_affinity_matrix(gaussians)
         
-        # Mean-field inference
+        # 平均场推理
         for _ in range(self.config.crf_iterations):
             messages = affinity @ torch.softmax(logits, dim=-1)
             logits = logits + self.config.crf_weight * messages
@@ -266,44 +266,44 @@ class SemanticGaussianMapper:
         return logits
 ```
 
-**Applications**:
-- Semantic-aware scene editing
-- Object-level scene queries
-- Improved compression (semantic coding)
+**应用**:
+- 语义感知场景编辑
+- 对象级场景查询
+- 改进压缩（语义编码）
 
-### Compression Techniques
+### 压缩技术
 
-**Quantization + Entropy Coding**:
+**量化 + 熵编码**:
 
 ```python
 class GaussianCompressor:
     """
-    Compresses Gaussian scenes for storage and streaming
+    压缩高斯场景用于存储和流式传输
     """
     def __init__(self, config):
         self.config = config
         
     def compress(self, gaussians):
         """
-        Full compression pipeline
+        完整压缩管线
         """
         compressed = {}
         
-        # Position quantization (adaptive grid)
+        # 位置量化（自适应网格）
         positions = gaussians.positions.cpu().numpy()
         grid_size = self._compute_optimal_grid_size(positions)
         compressed['positions'] = self._quantize_positions(
             positions, grid_size
         )
         
-        # Covariance parameterization and quantization
+        # 协方差参数化和量化
         scales, rotations = self._parameterize_covariances(
             gaussians.covariances
         )
         compressed['scales'] = self._quantize_scales(scales)
         compressed['rotations'] = self._quantize_rotations(rotations)
         
-        # Opacity and color (perceptual quantization)
+        # 不透明度和颜色（感知量化）
         compressed['opacity'] = self._quantize_opacity(
             gaussians.opacity.cpu().numpy()
         )
@@ -311,10 +311,10 @@ class GaussianCompressor:
             gaussians.sh_coefficients.cpu().numpy()
         )
         
-        # Entropy coding (ANS)
+        # 熵编码（ANS）
         compressed = self._entropy_encode(compressed)
         
-        # Metadata
+        # 元数据
         compressed['metadata'] = {
             'num_gaussians': len(gaussians),
             'grid_size': grid_size,
@@ -329,76 +329,174 @@ class GaussianCompressor:
         return original_size / compressed_size
 ```
 
-**Results**:
-- **45:1 compression ratio** with minimal quality loss
-- **Progressive streaming**: Coarse-to-fine loading
-- **Random access**: View-dependent streaming
+**结果**:
+- **45:1 压缩比**，质量损失最小
+- **渐进式流式传输**: 从粗到细加载
+- **随机访问**: 视图依赖流式传输
 
-## Personal Responsibilities
+## 个人职责
 
-- **Proposed** anisotropic Gaussian representation
-- **Designed** adaptive density control algorithm
-- **Implemented** semantic fusion pipeline
-- **Developed** compression techniques with progressive loading
-- **Published** 2 papers at CVPR/ICCV workshops
+- **提出** 各向异性高斯表示
+- **设计** 自适应密度控制算法
+- **实现** 语义融合管线
+- **开发** 带有渐进式加载的压缩技术
+- **发表** 2 篇论文于 CVPR/ICCV 研讨会
 
-## Project Outcomes
+## 项目成果
 
-### Quantitative Results
+### 定量结果
 
-| Dataset | PSNR ↑ | SSIM ↑ | LPIPS ↓ | Compression |
-|---------|--------|--------|---------|-------------|
+| 数据集 | PSNR ↑ | SSIM ↑ | LPIPS ↓ | 压缩比 |
+|--------|--------|--------|---------|--------|
 | Mip-NeRF360 | 28.4 dB | 0.89 | 0.12 | 42:1 |
 | Tanks & Temples | 26.8 dB | 0.87 | 0.15 | 38:1 |
 | ScanNet | 25.2 dB | 0.84 | 0.18 | 35:1 |
-| Custom Indoor | 29.1 dB | 0.91 | 0.10 | 48:1 |
+| 自定义室内 | 29.1 dB | 0.91 | 0.10 | 48:1 |
 
-### Comparison with Baselines
+### 与基线对比
 
-| Method | Training Time | Memory | FPS | Quality |
-|--------|--------------|--------|-----|---------|
-| Original 3DGS | 30 min | 4.2 GB | 120 | Baseline |
-| **Our Method** | **22 min** | **2.8 GB** | **145** | **+1.2 dB** |
-| NeRF | 8 hours | 1.5 GB | 0.5 | -2.1 dB |
-| Instant NGP | 5 min | 3.5 GB | 90 | -0.8 dB |
+| 方法 | 训练时间 | 内存 | FPS | 质量 |
+|------|----------|------|-----|------|
+| 原始 3DGS | 30 分钟 | 4.2 GB | 120 | 基线 |
+| **本方法** | **22 分钟** | **2.8 GB** | **145** | **+1.2 dB** |
+| NeRF | 8 小时 | 1.5 GB | 0.5 | -2.1 dB |
+| Instant NGP | 5 分钟 | 3.5 GB | 90 | -0.8 dB |
 
-### Publications
+### 发表论文
 
 1. **"Efficient Gaussian Splatting with Anisotropic Representations"**
-   - CVPR Workshop on Neural Rendering, 2024
-   - Oral presentation
+   - CVPR 研讨会：神经渲染，2024
+   - 口头报告
 
 2. **"Semantic-Aware Compression for 3D Gaussian Scenes"**
-   - ICCV Workshop on 3D Vision, 2024
-   - Best Paper Award
+   - ICCV 研讨会：3D 视觉，2024
+   - 最佳论文奖
 
-## Demo
+## 演示
 
-### Quality Comparison
+### 质量对比
 
-![Quality Comparison](/assets/projects/reconstruction-research/quality-comparison.png)
+![质量对比](/assets/projects/reconstruction-research/quality-comparison.png)
 
-*Side-by-side comparison showing improved edge reconstruction*
+*并排对比显示改进的边缘重建*
 
-### Compression Visualization
+### 压缩可视化
 
-![Compression Demo](/assets/projects/reconstruction-research/compression-demo.png)
+![压缩演示](/assets/projects/reconstruction-research/compression-demo.png)
 
-*Progressive loading from 100:1 to 1:1 compression*
+*从 100:1 到 1:1 压缩的渐进式加载*
 
-### Semantic Segmentation
+### 语义分割
 
-![Semantic Fusion](/assets/projects/reconstruction-research/semantic-fusion.png)
+![语义融合](/assets/projects/reconstruction-research/semantic-fusion.png)
 
-*3D semantic labels lifted from 2D segmentation*
+*从 2D 分割提升的 3D 语义标签*
 
-## Related Projects
+## 画廊
 
-- [3DGS Rendering Engine](/projects/3dgs-engine) - Production rendering system
-- [Measurement System (3DGS)](/projects/measurement-system) - Applied measurement
+<div class="gallery-grid">
 
-## References
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/reconstruction-research/quality-comparison.png" alt="质量对比" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>质量对比</h4>
+    <p>与基线方法对比</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/reconstruction-research/compression-demo.png" alt="压缩演示" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>压缩演示</h4>
+    <p>渐进式加载</p>
+  </div>
+</div>
+
+<div class="gallery-item">
+  <div class="gallery-image-wrapper">
+    <img src="/assets/projects/reconstruction-research/semantic-fusion.png" alt="语义融合" class="gallery-image" />
+  </div>
+  <div class="gallery-info">
+    <h4>语义融合</h4>
+    <p>3D 语义标注</p>
+  </div>
+</div>
+
+</div>
+
+## 相关项目
+
+- [3DGS 渲染引擎](/projects/3dgs-engine) - 生产渲染系统
+- [测量系统 (3DGS)](/projects/measurement-system) - 应用测量
+
+## 参考文献
 
 1. Kerbl, B., et al. "3D Gaussian Splatting for Real-Time Radiance Field Rendering." SIGGRAPH 2023.
 2. Mildenhall, B., et al. "Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields." CVPR 2022.
 3. Krahenbuhl, P., Koltun, V. "Efficient Inference in Fully Connected CRFs with Gaussian Edge Potentials." NeurIPS 2011.
+
+<style>
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  background-color: var(--vp-c-bg-alt);
+}
+
+.gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-info {
+  padding: 1.25rem;
+}
+
+.gallery-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--vp-c-brand);
+}
+
+.gallery-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+</style>
